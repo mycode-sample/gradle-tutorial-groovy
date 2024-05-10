@@ -2,6 +2,24 @@ plugins {
     id 'java'
 }
 
-dependencies {
-    implementation(project(":service"))
+repositories {
+    maven {
+        url 'https://maven.aliyun.com/repository/public/'
+    }
+    maven {
+        url 'https://maven.aliyun.com/repository/central'
+    }
+    mavenCentral()
 }
+
+dependencies {
+    implementation project(':service')
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.16.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.16.2'
+    implementation 'org.dom4j:dom4j:2.1.4'
+
+    testImplementation 'junit:junit:4.12'
+
+}
+
