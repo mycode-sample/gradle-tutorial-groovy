@@ -1,4 +1,4 @@
-rootProject.name = 'gradle-turtorial-groovy'
+rootProject.name = 'gradle-tutorial-groovy'
 
 include('app')
 include('service')
