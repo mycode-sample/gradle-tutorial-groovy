@@ -3,3 +3,22 @@ rootProject.name = 'gradle-tutorial-groovy'
 include('app')
 include('service')
 include('api')
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            version('jackson', '2.16.2')
+            version('logback', '1.5.6')
+            library('jackson-core', 'com.fasterxml.jackson.core', 'jackson-core').versionRef('jackson')
+            library('jackson-databind', 'com.fasterxml.jackson.core', 'jackson-databind').versionRef('jackson')
+            library('jackson-annotations', 'com.fasterxml.jackson.core', 'jackson-annotations').version('2.16.2')
+
+            library('slf4j', 'org.slf4j:slf4j-api:2.0.9')
+            library('logback-core', 'ch.qos.logback', 'logback-core').versionRef('logback')
+            library('logback-classic', 'ch.qos.logback', 'logback-classic').versionRef('logback')
+
+            bundle('jackson', ['jackson-core', 'jackson-databind', 'jackson-annotations'])
+            bundle('log', ['slf4j', 'logback-core', 'logback-classic'])
+        }
+    }
+}
