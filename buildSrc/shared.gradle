@@ -11,12 +11,12 @@ repositories {
 dependencies {
 
     implementation 'org.dom4j:dom4j:2.1.4'
-    implementation(libs.slf4j)
-    implementation(libs.logback.core)
-    implementation(libs.logback.classic)
-    implementation(libs.jackson.core)
-    implementation(libs.jackson.annotations)
-    implementation(libs.jackson.databind)
+    implementation libs.slf4j
+    implementation libs.logback.core
+    implementation libs.logback.classic
+    implementation libs.jackson.core
+    implementation libs.jackson.annotations
+    implementation libs.jackson.databind
 
     testImplementation 'junit:junit:4.12'
 }
