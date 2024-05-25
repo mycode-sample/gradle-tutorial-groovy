@@ -1,0 +1,67 @@
+//插件
+plugins {
+    id 'java'
+    id 'idea'
+    id 'java-library'
+    id 'org.springframework.boot' version '2.7.15'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+//allprojects：所有模块生效
+allprojects {
+    // 配置项目信息
+    group = 'com.chen.gradletutorial'
+    version = '0.0.1-SNAPSHOT'
+    // 配置字符编码
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    java {
+        sourceCompatibility = '8'
+        targetCompatibility = '8'
+    }
+
+    //仓库配置
+    repositories {
+        //本地
+        mavenLocal()
+        //阿里仓库
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        //公司仓库。必须用：https。Gradle默认情况下不允许使用不安全的协议，以提高安全性。
+        //        maven { url 'https://******:****/repository/maven-public/' }
+        //中央仓库
+        mavenCentral()
+    }
+
+}
+
+//subprojects：所有子模块生效——springboot配置、导包版本管理、打包管理
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    //所有子模块都是springboot项目，如不是，不能打包。
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    //所有子模块的-依赖版本管理
+    dependencyManagement {
+        dependencies {
+            dependency 'cn.hutool:hutool-all:5.0.7'
+            dependency "org.apache.commons:commons-lang3:3.5"
+            dependency 'com.fasterxml.jackson.core:jackson-core:2.16.2'
+            dependency 'com.fasterxml.jackson.core:jackson-databind:2.16.2'
+            dependency 'com.fasterxml.jackson.core:jackson-annotations:2.16.2'
+            dependency 'org.slf4j:slf4j-api:2.0.9'
+            dependency 'ch.qos.logback:logback-core:1.5.6'
+            dependency 'ch.qos.logback:logback-classic:1.5.6'
+        }
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+}
+
+
