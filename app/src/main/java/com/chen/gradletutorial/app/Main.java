@@ -18,6 +18,7 @@ public class Main {
         UserService userService = new UserService();
         String name = userService.getName();
         // 中文乱码，暂时无法解决
+        log.info("是不是乱码");
         System.out.println("用户名:" + name);
         System.out.println("username:" + name);
         Properties properties = System.getProperties();
@@ -27,5 +28,13 @@ public class Main {
         }
         OutputStream os = new FileOutputStream("temp/system.json");
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(os, properties);
+        Properties p2 = new Properties();
+        properties.keySet().forEach(k -> {
+            if (k.toString().contains("encoding")) {
+                p2.setProperty(k.toString(), properties.getProperty(k.toString()));
+            }
+        });
+        OutputStream os2 = new FileOutputStream("temp/encoding.json");
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(os2, p2);
     }
 }
